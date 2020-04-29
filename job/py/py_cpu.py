@@ -12,15 +12,10 @@
 #PJM -L "vnode-core=36"
 
 # elapsed-time limit
-#PJM -L "elapse=1:00"
+#PJM -L "elapse=10:00"
 
 # Output standard error to the same file that standard output
 #PJM -j
-#-----------------------------------------------------
-
-# cuda vesion
-#-----------------------------------------------------
-module load cuda/10.1
 #-----------------------------------------------------
 
 
