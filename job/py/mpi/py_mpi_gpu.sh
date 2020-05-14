@@ -16,7 +16,7 @@
 #PJM -L "vnode-core=36"
 
 # elapsed-time limit
-#PJM -L "elapse=1:00"
+#PJM -L "elapse=10:00"
 
 # Output standard error to the same file that standard output
 #PJM -j
@@ -38,6 +38,15 @@ module load cuda/10.1
 # python version
 #-----------------------------------------------------
 module load python/3.6.2
+#-----------------------------------------------------
+
+
+# python package
+#-----------------------------------------------------
+pip install fastrlock --user
+pip install six --user
+pip install numpy --user
+pip install cupy-cuda101 --user
 #-----------------------------------------------------
 
 
@@ -87,5 +96,5 @@ date
 
 # run
 #-----------------------------------------------------
-mpiexec.hydra -n $NUM_PROCS python3 main.py
+mpiexec.hydra -n $NUM_PROCS python3 single_multi_gpu.py --gpu
 #-----------------------------------------------------
