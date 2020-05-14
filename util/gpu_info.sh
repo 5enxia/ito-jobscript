@@ -3,10 +3,10 @@
 #PJM -L "rscunit=ito-b"
 
 # resource group
-#PJM -L "rscgrp=ito-g-4-dbg"
+#PJM -L "rscgrp=ito-g-16-dbg"
 
 # number of nodes
-#PJM -L "vnode=1"
+#PJM -L "vnode=4"
 
 # number of cores per node
 #PJM -L "vnode-core=36"
