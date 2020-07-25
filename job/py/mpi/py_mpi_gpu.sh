@@ -21,6 +21,9 @@
 # Output standard error to the same file that standard output
 #PJM -j
 
+# Send Mail
+#PJM --mail-list "xxx@yyy"
+#PJM -m e
 #-----------------------------------------------------
 
 
@@ -30,28 +33,7 @@ module load intel/2019.4
 #-----------------------------------------------------
 
 
-# cuda vesion
-#-----------------------------------------------------
-module load cuda/10.1
-#-----------------------------------------------------
-
-
-# python version
-#-----------------------------------------------------
-module load python/3.6.2
-#-----------------------------------------------------
-
-
-# python package
-#-----------------------------------------------------
-#pip install fastrlock --user
-#pip install six --user
-#pip install numpy --user
-#pip install cupy-cuda101 --user
-#-----------------------------------------------------
-
-
-# Intel MPI
+# intel compiler env
 #-----------------------------------------------------
 # number of nodes
 NUM_NODES=$PJM_VNODES
@@ -66,7 +48,6 @@ NUM_PROCS=16
 NUM_THREADS=9
 
 # number of MPI procs
-# export I_MPI_PERHOST=$NUM_CORES
 export I_MPI_PERHOST=`expr $NUM_CORES / $NUM_THREADS`
 
 # MPI communication means
@@ -91,10 +72,54 @@ export I_MPI_HYDRA_BOOTSTRAP_EXEC=/bin/pjrsh
 export I_MPI_HYDRA_HOST_FILE=${PJM_O_NODEINF}
 #-----------------------------------------------------
 
+
+# cuda
+#-----------------------------------------------------
+module load cuda/10.1
+#-----------------------------------------------------
+
+
+# cuda-aware mpi
+#-----------------------------------------------------
+#module load exp-openmpi/3.0.0-intel
+#module load exp-mvapich2/2.2-intel
+#-----------------------------------------------------
+
+
+# cuda-aware mpi env
+#-----------------------------------------------------
+#export MV2_SHOW_CPU_BINDING=1
+
+# numactl
+#export MV2_ENABLE_AFFINITY=0
+#export MV2_USE_CUDA=1
+
+# GDRDRV
+#export MV2_GPUDIRECT_GDRCOPY_LIB=/usr/local/lib64/libgdrapi.so.1.2
+#export LD_PRELOAD=/home/usr0/m70000a/opt/mvapich2-2.2-gdr/lib64/libmpi.so.12.0.5
+#-----------------------------------------------------
+
+
+# python
+#-----------------------------------------------------
+module load python/3.6.2
+#-----------------------------------------------------
+
+
+# python package
+#-----------------------------------------------------
+#pip install fastrlock --user
+#pip install six --user
+#pip install numpy --user
+#pip install cupy-cuda101 --user
+#-----------------------------------------------------
+
+
 # date
 #-----------------------------------------------------
 date
 #-----------------------------------------------------
+
 
 # run
 #-----------------------------------------------------
