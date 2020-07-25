@@ -50,7 +50,7 @@ NUM_PROCS=16
 NUM_THREADS=9
 
 # number of MPI procs
-export I_MPI_PERHOST=$NUM_CORES='expr $NUM_CORES / $NUM_THREADS'
+export I_MPI_PERHOST=`expr $NUM_CORES / $NUM_THREADS`
 
 # MPI communication means
 export I_MPI_FABRICS=shm:ofi

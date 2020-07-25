@@ -7,19 +7,20 @@
 #PJM -L "rscunit=ito-b"
 
 # resource group
-#PJM -L "rscgrp=ito-g-4-dbg"
+#PJM -L "rscgrp=ito-g-16-dbg"
 
 # number of virtual nodes
-#PJM -L "vnode=1"
+#PJM -L "vnode=4"
 
 # number of cores per virtual node
 #PJM -L "vnode-core=36"
 
 # elapsed-time limit
-#PJM -L "elapse=10:00"
+#PJM -L "elapse=30:00"
 
 # Output standard error to the same file that standard output
 #PJM -j
+
 #-----------------------------------------------------
 
 
@@ -43,10 +44,10 @@ module load python/3.6.2
 
 # python package
 #-----------------------------------------------------
-pip install fastrlock --user
-pip install six --user
-pip install numpy --user
-pip install cupy-cuda101 --user
+#pip install fastrlock --user
+#pip install six --user
+#pip install numpy --user
+#pip install cupy-cuda101 --user
 #-----------------------------------------------------
 
 
@@ -59,13 +60,14 @@ NUM_NODES=$PJM_VNODES
 NUM_CORES=36
 
 # number of procs
-NUM_PROCS=4
+NUM_PROCS=16
 
 # number of threads per proc
-NUM_THREADS=1
+NUM_THREADS=9
 
 # number of MPI procs
-export I_MPI_PERHOST=$NUM_CORES='expr $NUM_CORES / $NUM_THREADS'
+# export I_MPI_PERHOST=$NUM_CORES
+export I_MPI_PERHOST=`expr $NUM_CORES / $NUM_THREADS`
 
 # MPI communication means
 export I_MPI_FABRICS=shm:ofi
@@ -96,5 +98,5 @@ date
 
 # run
 #-----------------------------------------------------
-mpiexec.hydra -n $NUM_PROCS python3 single_multi_gpu.py --gpu
+mpiexec.hydra -n $NUM_PROCS python3 main.py
 #-----------------------------------------------------
