@@ -1,9 +1,16 @@
 # ito
 - job
-  - c/py
-    - job template files
+  - c
+  - py
+    - single
+      - cpu
+      - gpu
+    - mpi
+      - cpu
+      - gpu
 - test
   - c/py
     - main exec files for test exec
 - iter
   - shell scipt template for iterative exec
+- util
