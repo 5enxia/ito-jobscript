@@ -22,18 +22,27 @@
 #PJM -j
 
 # Send Mail
-#PJM --mail-list "xxx@yyy"
+#PJM --mail-list "hoge@example.abc"
 #PJM -m e
+#-----------------------------------------------------
+
+
+# check loaded module
+#-----------------------------------------------------
+# module list
 #-----------------------------------------------------
 
 
 # compiler
 #-----------------------------------------------------
-module load intel/2019.4
+module load intel/2020.1
+# module load intel/2019.4
+
+# module load gcc/10.2.0
 #-----------------------------------------------------
 
 
-# intel compiler env
+# MPI
 #-----------------------------------------------------
 # number of nodes
 NUM_NODES=$PJM_VNODES
@@ -75,28 +84,34 @@ export I_MPI_HYDRA_HOST_FILE=${PJM_O_NODEINF}
 
 # cuda
 #-----------------------------------------------------
+# module unload cuda/11.0
+# module unload cuda/10.1
+# module unload cuda/8.1
+
+# module load cuda/11.0
 module load cuda/10.1
+# module load cuda/8.0
 #-----------------------------------------------------
 
 
 # cuda-aware mpi
 #-----------------------------------------------------
-#module load exp-openmpi/3.0.0-intel
-#module load exp-mvapich2/2.2-intel
+# module load exp-openmpi/3.0.0-intel
+# module load exp-mvapich2/2.2-intel
 #-----------------------------------------------------
 
 
 # cuda-aware mpi env
 #-----------------------------------------------------
-#export MV2_SHOW_CPU_BINDING=1
+# export MV2_SHOW_CPU_BINDING=1
 
 # numactl
-#export MV2_ENABLE_AFFINITY=0
-#export MV2_USE_CUDA=1
+# export MV2_ENABLE_AFFINITY=0
+# export MV2_USE_CUDA=1
 
 # GDRDRV
-#export MV2_GPUDIRECT_GDRCOPY_LIB=/usr/local/lib64/libgdrapi.so.1.2
-#export LD_PRELOAD=/home/usr0/m70000a/opt/mvapich2-2.2-gdr/lib64/libmpi.so.12.0.5
+# export MV2_GPUDIRECT_GDRCOPY_LIB=/usr/local/lib64/libgdrapi.so.1.2
+# export LD_PRELOAD=/home/usr0/m70000a/opt/mvapich2-2.2-gdr/lib64/libmpi.so.12.0.5
 #-----------------------------------------------------
 
 
@@ -105,13 +120,22 @@ module load cuda/10.1
 module load python/3.6.2
 #-----------------------------------------------------
 
-
-# python package
+# check installed python packege
 #-----------------------------------------------------
-#pip install fastrlock --user
-#pip install six --user
-#pip install numpy --user
-#pip install cupy-cuda101 --user
+# pip list
+#-----------------------------------------------------
+
+# install python package
+#-----------------------------------------------------
+# pip install -U numpy --user
+# pip install -U scipy --user
+
+# pip install -U fastrlock --user
+# pip install -U six --user
+
+# pip install -U cupy --user
+# pip install -U cupy-cuda110 --user
+# pip install -U cupy-cuda101 --user
 #-----------------------------------------------------
 
 
@@ -120,8 +144,16 @@ module load python/3.6.2
 date
 #-----------------------------------------------------
 
+# argv
+#-----------------------------------------------------
+RUNTIME='python3'
+MPI_PROGRAM='main.py'
+#-----------------------------------------------------
 
-# run
-#-----------------------------------------------------
-mpiexec.hydra -n $NUM_PROCS python3 main.py
-#-----------------------------------------------------
+# exec
+# -----------------------------------------------------
+mpiexec.hydra \
+	-n $NUM_PROCS \
+	$RUNTIME \
+	$MPI_PROGRAM
+# -----------------------------------------------------
