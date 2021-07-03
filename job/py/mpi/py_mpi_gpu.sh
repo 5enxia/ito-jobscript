@@ -152,8 +152,10 @@ MPI_PROGRAM='main.py'
 
 # exec
 # -----------------------------------------------------
-mpiexec.hydra \
-	-n $NUM_PROCS \
-	$RUNTIME \
-	$MPI_PROGRAM
+for i in {0..0}; do
+	mpiexec.hydra \
+		-n $NUM_PROCS \
+		$RUNTIME \
+		$MPI_PROGRAM
+done
 # -----------------------------------------------------
