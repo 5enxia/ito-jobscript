@@ -73,8 +73,10 @@ pip uninstall mpi4py --yes
 # module load gcc/10.2.0
 
 ## mpi
+### openmpi
+module load openmpi/3.1.3-nocuda-intel18.3
 ### mvapich
-module load mvapich/gdr-2.3-cuda10.1-gcc4.8.5
+# module load mvapich/gdr-2.3-cuda10.1-gcc4.8.5
 
 pip install -U mpi4py --user
 #-----------------------------------------------------
