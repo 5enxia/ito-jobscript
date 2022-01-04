@@ -55,10 +55,11 @@ pip install -U numpy --user
 pip install -U scipy --user
 
 # install
-cupy_install 10.1 101
+cupy_uninstall 10.1 101
+cupy_install 9.1 91
 
 # load cuda
-module load cuda/10.1
+module load cuda/9.1
 #-----------------------------------------------------
 
 
@@ -74,9 +75,11 @@ pip uninstall mpi4py --yes
 
 ## mpi
 ### openmpi
-module load openmpi/3.1.3-nocuda-intel18.3
+# module load openmpi/3.1.3-nocuda-intel18.3
+moudle load openmpi/3.1.3-cuda9.1-intel18.3
 ### mvapich
 # module load mvapich/gdr-2.3-cuda10.1-gcc4.8.5
+
 
 pip install -U mpi4py --user
 #-----------------------------------------------------
@@ -97,4 +100,7 @@ pip list | grep mpi
 #-----------------------------------------------------
 date
 #-----------------------------------------------------
+
+# cupy version
+python3 cupy_version.py
 
