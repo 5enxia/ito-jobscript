@@ -78,14 +78,18 @@ pip uninstall mpi4py --yes
 ## mpi
 ### openmpi
 # module load openmpi/3.1.3-nocuda-intel18.3
-moudle load openmpi/3.1.3-cuda9.1-intel18.3
+# moudle load openmpi/3.1.3-cuda9.1-intel18.3
 ### mvapich
-#module load mvapich/gdr-2.3-cuda10.1-gcc4.8.5
-
+module load mvapich/gdr-2.3-cuda10.1-gcc4.8.5
 
 pip install -U mpi4py --user
 #-----------------------------------------------------
 
+# numpy
+#-----------------------------------------------------
+pip uninstall numpy --yes
+pip install -U numpy --user
+#-----------------------------------------------------
 
 # check load & install modules
 #-----------------------------------------------------
