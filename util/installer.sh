@@ -22,20 +22,30 @@
 #-----------------------------------------------------
 
 
-# python
+# params
 #-----------------------------------------------------
-# runtime
+iv=(10 1)
+# uv=(9 1)
+#-----------------------------------------------------
+
+
+# Python3
+#-----------------------------------------------------
 module load python/3.6.2
 
-# upgrade pip
-pip install -U pip
+pip install -U pip --user
+pip install -U fastrlock --user
+pip install -U six --user
+pip install -U numpy --user
+pip install -U scipy --user
+
+module unload python/3.6.2
 #-----------------------------------------------------
 
 
-# cuda & cupy
+# cupy
 #-----------------------------------------------------
-# function
-## install
+## function
 function cupy_install() {
     module load cuda/$1
     pip install -U cupy-cuda$2 --user
@@ -48,65 +58,48 @@ function cupy_uninstall() {
     module unload cuda/$1
 }
 
-# dependent modules
-pip install -U fastrlock --user
-pip install -U six --user
-pip install -U numpy --user
-pip install -U scipy --user
+# cupy_uninstall ${uv[0]}.${uv[1]} ${uv[0]}${uv[1]}
+# cupy_install ${iv[0]}.${iv[1]} ${iv[0]}${iv[1]}
+#-----------------------------------------------------
 
-# install
-iv=(10 1)
-uv=(9 1)
-cupy_uninstall ${uv[0]}.${uv[1]} ${uv[0]}${uv[1]}
-cupy_install ${iv[0]}.${iv[1]} ${iv[0]}${iv[1]}
 
-# load cuda
+# CUDA
+#-----------------------------------------------------
 module load cuda/${iv[0]}.${iv[1]}
 #-----------------------------------------------------
 
 
 # MPI
 #-----------------------------------------------------
+module load python/3.6.2
 pip uninstall mpi4py --yes
+module unload python/3.6.2
 
-## intel
+## Intel
 # module load intel/2020.1
 
-## gcc
-# module load gcc/10.2.0
-
 ## mpi
-### openmpi
+### OpenMPI
 # module load openmpi/3.1.3-nocuda-intel18.3
 # moudle load openmpi/3.1.3-cuda9.1-intel18.3
-### mvapich
+### MVAPICH2
 module load mvapich/gdr-2.3-cuda10.1-gcc4.8.5
+export MV2_GPUDIRECT_GDRCOPY_LIB=/home/app/mvapich/gdrcopy/lib64/libgdrapi.so
+export LD_PRELOAD=/home/app/mvapich/gdr-2.3.2-cuda10.1-gcc4.8.5/lib64/libmpi.so
 
+module load python/3.6.2
 pip install -U mpi4py --user
 #-----------------------------------------------------
 
-# numpy
-#-----------------------------------------------------
-pip uninstall numpy --yes
-pip install -U numpy --user
-#-----------------------------------------------------
 
-# check load & install modules
+# check
 #-----------------------------------------------------
-# moudle
+## moudle
 module list
 
-# python module
+## Python
 pip list | grep cupy
 pip list | grep mpi
-#-----------------------------------------------------
-
-
-# date
-#-----------------------------------------------------
-date
-#-----------------------------------------------------
-
-# cupy version
+### cupy
 python3 cupy_version.py
-
+#-----------------------------------------------------
