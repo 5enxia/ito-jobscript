@@ -25,7 +25,7 @@
 # params
 #-----------------------------------------------------
 iv=(10 1)
-# uv=(9 1)
+uv=(8 0)
 #-----------------------------------------------------
 
 
@@ -39,7 +39,7 @@ pip install -U six --user
 pip install -U numpy --user
 pip install -U scipy --user
 
-module unload python/3.6.2
+# module unload python/3.6.2
 #-----------------------------------------------------
 
 
@@ -48,18 +48,25 @@ module unload python/3.6.2
 ## function
 function cupy_install() {
     module load cuda/$1
-    pip install -U cupy-cuda$2 --user
+    pip3 install -U cupy-cuda$2 --user
     module unload cuda/$1
 }
 ## uninstall
 function cupy_uninstall() {
     module load cuda/$1
-    pip uninstall cupy-cuda$2 --yes
+    # pip3 uninstall cupy --yes
+    pip3 uninstall cupy-cuda$2 --yes
     module unload cuda/$1
 }
 
-# cupy_uninstall ${uv[0]}.${uv[1]} ${uv[0]}${uv[1]}
-# cupy_install ${iv[0]}.${iv[1]} ${iv[0]}${iv[1]}
+cupy_uninstall ${uv[0]}.${uv[1]} ${uv[0]}${uv[1]}
+cupy_install ${iv[0]}.${iv[1]} ${iv[0]}${iv[1]}
+
+## nccl
+echo -----------------------------
+module load cuda/${iv[0]}.${iv[1]}
+python3 -m cupyx.tools.install_library --library nccl --cuda 10.1
+echo -----------------------------
 #-----------------------------------------------------
 
 
