@@ -87,8 +87,8 @@ module unload python/3.6.2
 
 ## mpi
 ### OpenMPI
-# module load openmpi/3.1.3-nocuda-intel18.3
-# moudle load openmpi/3.1.3-cuda9.1-intel18.3
+# module load openmpi/3.1.3-nocuda-gcc4.8.5
+# module load openmpi/3.1.3-cuda9.1-gcc4.8.5
 ### MVAPICH2
 module load mvapich/gdr-2.3-cuda10.1-gcc4.8.5
 export MV2_GPUDIRECT_GDRCOPY_LIB=/home/app/mvapich/gdrcopy/lib64/libgdrapi.so
