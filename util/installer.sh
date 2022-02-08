@@ -6,10 +6,10 @@
 #PJM -L "rscunit=ito-b"
 
 # resource group
-#PJM -L "rscgrp=ito-g-4-dbg"
+#PJM -L "rscgrp=ito-g-16"
 
 # number of virtual nodes
-#PJM -L "vnode=1"
+#PJM -L "vnode=4"
 
 # number of cores per virtual node
 #PJM -L "vnode-core=36"
@@ -59,14 +59,14 @@ function cupy_uninstall() {
     module unload cuda/$1
 }
 
-cupy_uninstall ${uv[0]}.${uv[1]} ${uv[0]}${uv[1]}
-cupy_install ${iv[0]}.${iv[1]} ${iv[0]}${iv[1]}
+# cupy_uninstall ${uv[0]}.${uv[1]} ${uv[0]}${uv[1]}
+# cupy_install ${iv[0]}.${iv[1]} ${iv[0]}${iv[1]}
 
 ## nccl
-echo -----------------------------
-module load cuda/${iv[0]}.${iv[1]}
-python3 -m cupyx.tools.install_library --library nccl --cuda 10.1
-echo -----------------------------
+# echo -----------------------------
+# module load cuda/${iv[0]}.${iv[1]}
+# python3 -m cupyx.tools.install_library --library nccl --cuda 10.1
+# echo -----------------------------
 #-----------------------------------------------------
 
 
@@ -87,12 +87,12 @@ module unload python/3.6.2
 
 ## mpi
 ### OpenMPI
-# module load openmpi/3.1.3-nocuda-gcc4.8.5
+module load openmpi/3.1.3-nocuda-gcc4.8.5
 # module load openmpi/3.1.3-cuda9.1-gcc4.8.5
 ### MVAPICH2
-module load mvapich/gdr-2.3-cuda10.1-gcc4.8.5
-export MV2_GPUDIRECT_GDRCOPY_LIB=/home/app/mvapich/gdrcopy/lib64/libgdrapi.so
-export LD_PRELOAD=/home/app/mvapich/gdr-2.3.2-cuda10.1-gcc4.8.5/lib64/libmpi.so
+# module load mvapich/gdr-2.3-cuda10.1-gcc4.8.5
+# export MV2_GPUDIRECT_GDRCOPY_LIB=/home/app/mvapich/gdrcopy/lib64/libgdrapi.so
+# export LD_PRELOAD=/home/app/mvapich/gdr-2.3.2-cuda10.1-gcc4.8.5/lib64/libmpi.so
 
 module load python/3.6.2
 pip install -U mpi4py --user
